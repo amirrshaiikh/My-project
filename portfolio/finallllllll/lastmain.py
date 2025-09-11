@@ -15,7 +15,7 @@ SCRIPTS = {
     # "Treasure Island": "scripts/D3TreasureIsland.py",
     # "Rock, Paper, Scissor": "scripts/D4RockPaper.py",
     # "Password Generator": "scripts/D5PasswordGenerator.py",
-    # "Hangman Game": "scripts/Hangman/Day7- Hangman.py",
+    "Hangman Game": "scripts/Hangman/gui.py",
     # "Cipher Code": "scripts/D8CaesarCipher.py",
     # "Calculator": "scripts/D10Calc.py",
     # "BlackJack": "scripts/D11Blackjack.py",

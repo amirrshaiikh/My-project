@@ -4,8 +4,8 @@ import time
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
-        self.shape('turtle')
-        self.color('white')
+        self.shape('circle')
+        self.color('cyan')
         self.penup()
         self.speed(4)
         self.abs_y=1

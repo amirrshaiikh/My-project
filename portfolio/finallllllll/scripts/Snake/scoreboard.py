@@ -6,7 +6,7 @@ class Score(Turtle):
         self.hideturtle()
         self.color("white")
         self.score=0
-        with open(r"C:\Users\moham\Documents\portfolio\scripts\Snake\main.txt" , mode="r") as file:
+        with open(r"main.txt" , mode="r") as file:
             self.high_score=int(file.read())
         self.update_scoreboard()
 
@@ -26,7 +26,7 @@ class Score(Turtle):
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
-            with open(r'C:\Users\moham\Documents\portfolio\scripts\Snake\main.txt', mode='w') as file:
+            with open(r'main.txt', mode='w') as file:
                 file.write(str(self.high_score))
         self.score=0
         self.update_scoreboard()

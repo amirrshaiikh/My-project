@@ -3,22 +3,23 @@ import pandas as pd
 import os
 
 # Get base directory where this file is located
-base_dir = os.path.dirname(os.path.abspath(__file__))
+# base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # ==== Setup screen ====
 sc = Screen()
 sc.title("U.S. States Game")
-sc.setup(width=800, height=800)
+sc.setup(width=750, height=500)
+sc.bgpic("blank_states_img.gif")
 
 # ==== Load background map image ====
-image_path = os.path.join(base_dir, "blank_states_img.gif")
-sc.addshape(image_path)  # Register shape
-map_turtle = Turtle()
-map_turtle.shape(image_path)
-map_turtle.penup()
+# image_path = "blank_states_img.gif"
+# sc.addshape(image_path)  # Register shape
+# map_turtle = Turtle()
+# map_turtle.shape(image_path)
+# map_turtle.penup()
 
 # ==== Read CSV ====
-csv_path = os.path.join(base_dir, "50_states.csv")
+csv_path =  "50_states.csv"
 data = pd.read_csv(csv_path)
 all_states = data.state.to_list()
 
@@ -38,7 +39,7 @@ while len(guessed_states) < 50:
     if answer_state == "Exit":
         # Save remaining states to CSV
         remaining = [state for state in all_states if state not in guessed_states]
-        remaining_path = os.path.join(base_dir, "remaining.csv")
+        remaining_path = "remaining.csv"
         pd.DataFrame(remaining).to_csv(remaining_path)
         break
 
