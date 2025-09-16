@@ -30,7 +30,7 @@ SCRIPTS = {
     "Snake Game": "scripts/Snake/main.py",
     "Pong Game": "scripts/Pong/main.py",
     "Turtle Crossing": "scripts/TurtleCrossing/main.py",
-    "Guess the US states": "scripts/USStatesGuess/main.py",
+    "Guess the Indian States": "scripts/IndianStates/main.py",
     "Pounds to Kg Converter": "scripts/D27PoundstoKg.py"
 }
 

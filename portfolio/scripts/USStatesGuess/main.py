@@ -38,8 +38,8 @@ while len(guessed_states) < 50:
     if answer_state == "Exit":
         # Save remaining states to CSV
         remaining = [state for state in all_states if state not in guessed_states]
-        remaining_path = os.path.join(base_dir, "remaining.csv")
-        pd.DataFrame(remaining).to_csv(remaining_path)
+        # remaining_path = os.path.join(base_dir, "remaining.csv")
+        pd.DataFrame(remaining).to_csv("remaining.csv")
         break
 
     if answer_state in all_states and answer_state not in guessed_states:
