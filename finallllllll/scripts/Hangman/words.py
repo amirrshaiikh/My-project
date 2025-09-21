@@ -1,4 +1,4 @@
-word_list=[
+word_list={
     'electricity',
     'donkey',
     'hardware',
@@ -169,4 +169,4 @@ word_list=[
     'spirit',
     'future',
     'import'
-]
+}
