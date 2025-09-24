@@ -5,23 +5,16 @@ import os
 import threading
 import sys
 
-# Determine base directory depending on execution context
+
 base_dir = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
 
-# List of script names and relative paths
+
 SCRIPTS = {
-    # "Tip Calculator": "scripts/D2TipCalculator.py",
-    # "Pizza Maker": "scripts/D3Pizza.py",
-    # "Treasure Island": "scripts/D3TreasureIsland.py",
-    # "Rock, Paper, Scissor": "scripts/D4RockPaper.py",
-    # "Password Generator": "scripts/D5PasswordGenerator.py",
+    "Rock, Paper, Scissor": "scripts/rock.py",
     "Hangman Game": "scripts/Hangman/gui.py",
-    # "Cipher Code": "scripts/D8CaesarCipher.py",
-    # "Calculator": "scripts/D10Calc.py",
-    # "BlackJack": "scripts/D11Blackjack.py",
-    # "Guess the Number": "scripts/D12NumberGuessing.py",
-    # "Higher Lower Game": "scripts/HigherLower/main.py",
-    # "Coffee Vending Machine": "scripts/CoffeeMachine/main.py",
+    "Cipher Code": "scripts/caesar.py",
+    "BlackJack": "scripts/blackjack.py",
+    "Higher Lower Game": "scripts/HigherLower/higher.py",
     "Random Walk": "scripts/D18RandomWalk.py",
     "Spirograph": "scripts/D18Spirograph.py",
     "Hirst Painting": "scripts/D18Hirst.py",
@@ -31,10 +24,11 @@ SCRIPTS = {
     "Pong Game": "scripts/Pong/main.py",
     "Turtle Crossing": "scripts/TurtleCrossing/main.py",
     "Guess the Indian States": "scripts/IndianStates/main.py",
-    "Pounds to Kg Converter": "scripts/D27PoundstoKg.py"
+    "Pounds to Kg Converter": "scripts/D27PoundstoKg.py",
+    "Password Generator": "scripts/Passgen/main.py"
 }
 
-# Appearance settings
+
 BG_COLOR = "#2b2b2b"
 FG_COLOR = "#ffffff"
 BUTTON_COLOR = "#444444"
@@ -75,7 +69,7 @@ def run_script(relative_path):
 
     threading.Thread(target=execute, daemon=True).start()
 
-# Main window setup
+# Main window 
 root = tk.Tk()
 root.title("Python Projects")
 root.geometry("800x600")
@@ -101,7 +95,7 @@ scrollbar.pack(side="right", fill="y")
 
 canvas.bind_all("<MouseWheel>", lambda e: canvas.yview_scroll(int(-1 * (e.delta / 120)), "units"))
 
-# Add buttons for each script
+# Add buttons
 for name, rel_path in SCRIPTS.items():
     tk.Button(scrollable_frame, text=name, width=40, anchor="w",
               bg=BUTTON_COLOR, fg=FG_COLOR, font=("Arial", 12),
