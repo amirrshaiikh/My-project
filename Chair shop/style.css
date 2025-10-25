@@ -1,16 +1,4 @@
-/*
-SPACING SYSTEM (px)
-2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 
-FONT SIZE SYSTEM (px)
-10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
-*/
-
-
-/* 
-MAIN COLOR: #087f5b
-GRAY: #343a40
-*/
 * {
   margin: 0;
   padding: 0;
@@ -81,11 +69,9 @@ padding: 16px 32px;
 .bttn {
   justify-self: start;
 }
-/* ------------------------ */
-/* COMPONENT STYLES */
-/* ------------------------ */
 
-/* HEADER */
+
+
 header {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -118,7 +104,6 @@ img {
   align-self: center;
 }
 
-/* FEATURES */
 
 .features {
   /* background-color:#f8f9fa; */
@@ -146,7 +131,6 @@ img {
   line-height: 1.7;
 }
 
-/* TESTIMONIAL */
 .testimonial-section {
   background-color:#087f5b;
   padding: 20px;

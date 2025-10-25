@@ -1,11 +1,4 @@
-/* 
-COLORS:
-DARK: 03001C
-PURPLE: 301E67
-BLUE: 5B8FB9
-LIGHT: B6EADA
-*/
-/* Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +12,6 @@ body {
   line-height: 1.6;
 }
 
-/* Navbar */
 header {
   /* background: #111; */
   background-color: #03001C;
