@@ -13,7 +13,7 @@ class HangmanGame:
         self.lives = 6
         self.chosen_word = random.choice(hangman_words.word_list)
         self.correct_letters = []
-        self.display = "_" * len(self.chosen_word)
+        self.display = "-" * len(self.chosen_word)
 
         # ------------------- UI ------------------- #
         self.logo_label = tk.Label(root, text=hangman_art.logo, font=("Courier", 10),
@@ -72,7 +72,7 @@ class HangmanGame:
             self.lives_label.config(text=f"Lives: {self.lives}/6")
 
         # Check Win
-        if "_" not in self.display:
+        if "-" not in self.display:
             self.message_label.config(text="🎉 YOU WIN! 🎉")
             self.guess_button.config(state="disabled")
 
