@@ -80,7 +80,7 @@ container = tk.Frame(root, bg=BG_COLOR)
 container.pack(fill="both", pady=10)
 
 canvas = tk.Canvas(container, bg=BG_COLOR, highlightthickness=0)
-scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+scrollbar = ttk.Scrollbar(container)
 scrollable_frame = tk.Frame(canvas, bg=BG_COLOR)
 
 scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
