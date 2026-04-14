@@ -1,0 +1,39 @@
+1.	* Develop android application using View Text and Edit Text.
+
+2.	Develop a program to implement Button, Image Button and Toggle Button
+
+3.	*Develop a program to design Checkbox and Radiobutton.
+
+4.	Develop a program to implement Progress Bar
+
+5.	Write program to implement Linear layout and Constraint layout to create any registration form with Custom Toast Alert
+
+6.	Develop a simple calculator which uses grid layout and GUI concepts
+
+7.	Develop a splash screen in android
+
+8.	*Design and develop any convertor application like temperature convertor /currency convertor/ volume convertor
+
+9.	*Develop a program to implement Date Picker in application
+
+10.	Develop a program to implement Time Picker in application
+
+11.	*Develop a program to implement new Activity using explicit intent and implicit intent to open any other website
+
+12.	Write a program for SMS application
+
+13.	*Develop a program to send and receive email
+
+14.	Develop a program to use camera
+
+
+15.	*Develop a registration application to insert and retrieve the data from the database
+
+
+16.	*Develop a program to implement services like bluetooth/wifi
+
+
+17.	*Develop a program to implement Scroll View, List View for any management system like library management/hotel management
+
+
+
