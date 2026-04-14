@@ -1,0 +1,106 @@
+Write a program for SMS application
+activity_mainxml:-
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Phone Number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Message"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send SMS" />
+
+</LinearLayout>
+
+
+
+MainActivity.java:-
+package com.example.pr_12;
+
+import android.Manifest;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText phone, message;
+    Button btnSend;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        phone = findViewById(R.id.phone);
+        message = findViewById(R.id.message);
+        btnSend = findViewById(R.id.btnSend);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+
+        btnSend.setOnClickListener(v -> {
+            String num = phone.getText().toString();
+            String msg = message.getText().toString();
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(num, null, msg, null, null);
+
+            Toast.makeText(MainActivity.this, "SMS Sent", Toast.LENGTH_SHORT).show();
+        });
+    }
+}
+
+
+AndroidManifest.xml:-
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PR_12">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

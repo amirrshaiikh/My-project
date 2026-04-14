@@ -1,0 +1,96 @@
+*Develop a registration application to insert and retrieve the data from the database
+
+activity_mainxml:-
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Data" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Data" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:paddingTop="20dp" />
+
+</LinearLayout>
+
+
+MainActivity.java:-
+package com.example.pr_15;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText name, email;
+    Button btnSave, btnView;
+    TextView result;
+    SQLiteDatabase db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        btnSave = findViewById(R.id.btnSave);
+        btnView = findViewById(R.id.btnView);
+        result = findViewById(R.id.result);
+
+        db = openOrCreateDatabase("UserDB", MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS users(name TEXT, email TEXT)");
+
+        btnSave.setOnClickListener(v -> {
+            String n = name.getText().toString();
+            String e = email.getText().toString();
+            db.execSQL("INSERT INTO users VALUES('" + n + "','" + e + "')");
+        });
+
+        btnView.setOnClickListener(v -> {
+            Cursor c = db.rawQuery("SELECT * FROM users", null);
+            StringBuilder data = new StringBuilder();
+
+            while (c.moveToNext()) {
+                data.append("Name: ").append(c.getString(0))
+                        .append("\nEmail: ").append(c.getString(1))
+                        .append("\n\n");
+            }
+
+            result.setText(data.toString());
+        });
+    }
+}

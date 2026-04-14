@@ -1,0 +1,79 @@
+ Develop a splash screen in android
+
+activity_main.xml:-
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Main Screen"
+        android:textSize="24sp"/>
+
+</LinearLayout>
+
+
+activity_splash.xml:-
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#2196F3">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My App"
+        android:textSize="30sp"
+        android:textColor="#fff"/>
+
+</LinearLayout>
+
+
+MainActivity.java:-
+package com.example.pr_7;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+    }
+}
+
+SplashActivity.java:-
+	package com.example.pr_7;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SplashActivity extends AppCompatActivity {
+
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_splash);
+
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        }, 3000);
+    }
+}

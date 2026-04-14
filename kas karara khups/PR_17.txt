@@ -1,0 +1,140 @@
+*Develop a program to implement Scroll View, List View for any management system like
+library management/hotel management
+
+*Develop a program to implement services like bluetooth/wifi
+
+Develop a program to use camera
+
+activity_mainxml:-
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Library Management System"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Library. You can view available books below." />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use this system to manage books and records." />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+
+MainActivity.java:-
+
+package com.example.pr_17;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView listView;
+
+    String[] books = {
+            "Java Programming",
+            "Android Development",
+            "Database Systems",
+            "Operating System",
+            "Computer Networks",
+            "Software Engineering",
+            "Data Structures",
+            "Machine Learning",
+            "Artificial Intelligence",
+            "Computer Architecture",
+            "Web Development",
+            "Cyber Security",
+            "Cloud Computing",
+            "Big Data Analytics",
+            "Internet of Things",
+            "Compiler Design",
+            "Discrete Mathematics",
+            "Digital Electronics",
+            "Python Programming",
+            "C Programming",
+            "C++ Programming",
+            "Mobile Computing",
+            "Data Mining",
+            "Information Security",
+            "Blockchain Technology",
+            "Augmented Reality",
+            "Virtual Reality",
+            "Human Computer Interaction"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = findViewById(R.id.listView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                books
+        );
+
+        listView.setAdapter(adapter);
+    }
+}
+
+AndroidManifest.xml:-
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PR_17">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

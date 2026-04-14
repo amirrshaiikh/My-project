@@ -1,0 +1,91 @@
+Develop a program to implement Button, Image Button and Toggle Button
+
+xml code:-
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Me"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/imgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_camera"
+        android:background="?attr/selectableItemBackgroundBorderless"
+
+        app:layout_constraintTop_toBottomOf="@id/btn"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <ToggleButton
+        android:id="@+id/toggleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="ON"
+        android:textOff="OFF"
+
+        app:layout_constraintTop_toBottomOf="@id/imgBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+main.java:-
+package com.example.pr_2;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ToggleButton;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btn;
+    ImageButton imgBtn;
+    ToggleButton toggleBtn;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+
+        btn = findViewById(R.id.btn);
+        imgBtn = findViewById(R.id.imgBtn);
+        toggleBtn = findViewById(R.id.toggleBtn);
+
+        btn.setOnClickListener(v ->
+                Toast.makeText(this, "Normal Button Clicked", Toast.LENGTH_SHORT).show()
+        );
+
+        imgBtn.setOnClickListener(v ->
+                Toast.makeText(this, "Image Button Clicked", Toast.LENGTH_SHORT).show()
+        );
+
+
+        toggleBtn.setOnClickListener(v -> {
+            if (toggleBtn.isChecked()) {
+                Toast.makeText(this, "Toggle ON", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Toggle OFF", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}

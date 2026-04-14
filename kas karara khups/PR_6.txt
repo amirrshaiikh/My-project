@@ -1,0 +1,162 @@
+Develop a simple calculator which uses grid layout and GUI concepts
+
+activity_main.xml:-
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        android:gravity="end"
+        android:padding="10dp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4">
+
+        <Button android:text="7" android:onClick="onClick"/>
+        <Button android:text="8" android:onClick="onClick"/>
+        <Button android:text="9" android:onClick="onClick"/>
+        <Button android:text="/" android:onClick="onClick"/>
+
+        <Button android:text="4" android:onClick="onClick"/>
+        <Button android:text="5" android:onClick="onClick"/>
+        <Button android:text="6" android:onClick="onClick"/>
+        <Button android:text="*" android:onClick="onClick"/>
+
+        <Button android:text="1" android:onClick="onClick"/>
+        <Button android:text="2" android:onClick="onClick"/>
+        <Button android:text="3" android:onClick="onClick"/>
+        <Button android:text="-" android:onClick="onClick"/>
+
+        <Button android:text="0" android:onClick="onClick"/>
+        <Button android:text="." android:onClick="onClick"/>
+        <Button android:text="C" android:onClick="clear"/>
+        <Button android:text="+" android:onClick="onClick"/>
+
+        <Button
+            android:text="="
+            android:onClick="calculate"
+            android:layout_columnSpan="4"
+            android:layout_width="match_parent"/>
+    </GridLayout>
+
+</LinearLayout>
+
+
+MainActivity.java:-
+package com.example.pr_6;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView display;
+    String input = "";
+
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+
+        display = findViewById(R.id.display);
+    }
+
+    public void onClick(View v) {
+        String value = ((TextView) v).getText().toString();
+        input += value;
+        display.setText(input);
+    }
+
+    public void clear(View v) {
+        input = "";
+        display.setText("0");
+    }
+
+    public void calculate(View v) {
+        try {
+            String expr = input;
+            double result = eval(expr);
+            display.setText(String.valueOf(result));
+            input = String.valueOf(result);
+        } catch (Exception e) {
+            display.setText("Error");
+            input = "";
+        }
+    }
+
+    public double eval(String str) {
+        return new Object() {
+            int pos = -1, ch;
+
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
+
+            boolean eat(int charToEat) {
+                while (ch == ' ') nextChar();
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                return x;
+            }
+
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if (eat('+')) x += parseTerm();
+                    else if (eat('-')) x -= parseTerm();
+                    else return x;
+                }
+            }
+
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if (eat('*')) x *= parseFactor();
+                    else if (eat('/')) x /= parseFactor();
+                    else return x;
+                }
+            }
+
+            double parseFactor() {
+                if (eat('+')) return parseFactor();
+                if (eat('-')) return -parseFactor();
+
+                double x;
+                int startPos = this.pos;
+
+                if (eat('(')) {
+                    x = parseExpression();
+                    eat(')');
+                } else {
+                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                }
+
+                return x;
+            }
+        }.parse();
+    }
+}

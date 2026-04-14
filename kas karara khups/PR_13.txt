@@ -1,0 +1,74 @@
+*Develop a program to send and receive email
+
+activity_mainxml:-
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Subject" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Message"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Email" />
+
+</LinearLayout>
+
+MainActivity.java:-
+package com.example.pr_13;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText email, subject, message;
+    Button btnSend;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        email = findViewById(R.id.email);
+        subject = findViewById(R.id.subject);
+        message = findViewById(R.id.message);
+        btnSend = findViewById(R.id.btnSend);
+
+        btnSend.setOnClickListener(v -> {
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email.getText().toString()});
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
+            intent.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
+
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        });
+    }
+}

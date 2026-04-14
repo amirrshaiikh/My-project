@@ -1,0 +1,70 @@
+Develop a program to implement Time Picker in application
+activity_mainxml:-
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/btnPickTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Time" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selected Time"
+        android:textSize="20sp"
+        android:paddingTop="20dp" />
+
+</LinearLayout>
+
+
+
+MainActivity.java:-
+package com.example.pr_10;
+
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnPickTime;
+    TextView txtTime;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnPickTime = findViewById(R.id.btnPickTime);
+        txtTime = findViewById(R.id.txtTime);
+
+        btnPickTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this,
+                        (view, selectedHour, selectedMinute) -> {
+                            txtTime.setText(selectedHour + ":" + selectedMinute);
+                        }, hour, minute, true);
+
+                timePickerDialog.show();
+            }
+        });
+    }
+}
